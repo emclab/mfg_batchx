@@ -1,0 +1,74 @@
+<div id="main_body">
+<h4><%=t('Batch Info') %></h4>
+
+<p>
+  <b><%= t('Customer') %></b>
+  <%= @rfq.customer.name %>
+</p>
+<p>
+  <b><%= t('Product Name') %></b>
+  <%= @rfq.product_name %>
+</p>
+<p>
+  <b><%= t('Drawing#') %></b>
+  <%= @rfq.drawing_num %>
+</p>
+<p>
+  <b><%= t('Order#') %></b>
+  <%= @batch.order_id %>
+</p>
+<p>
+  <b><%= t('Qty')  %></b>
+  <%= @batch.qty %>
+</p>
+<p>
+  <b><%= t('Start Date') %></b>
+  <%= @batch.start_date.strftime("%Y/%m/%d") %>
+</p>
+<p>
+  <b><%= t('Finish Date') %></b>
+  <%= @batch.finish_date.strftime("%Y/%m/%d") %>
+</p>
+
+<p>
+  <b><%= t('Qty Produced')  %></b>
+  <%= @batch.qty_produced %>
+</p>
+<p>
+  <b><%= t('Batch WT(kg)')  %></b>
+  <%= number_with_precision(@batch.qty * @rfq.product_wt/1000.00, :precision => 2) %>
+</p>
+<p>
+  <b><%= t('Void') %></b>
+  <%= @batch.void ? t('Yes') : t('No') %>
+</p>
+
+<p>
+  <b><%= t('Completed') %></b>
+  <%= @batch.completed ? t('Yes') : t('No') %>
+</p>
+
+<p>
+  <b><%= t('Batch Status') %></b>
+  <%= @batch.batch_status.name %>
+</p>
+<p>
+  <b><%= t('Brief Note') %></b>
+  <%= @batch.brief_note %>
+</p>
+<p>
+  <b><%= t('Last Updated By') %></b>
+  <%= @batch.last_updated_by.name %>
+</p>
+<p>
+  <b>LOG：</b>
+  <% Commonx::Log.where('resource_id = ? AND resource_name = ?', @batch.id, params[:controller].sub('/', '_')).order("created_at DESC").each do |t| %>
+    <li><%= t.created_at.strftime("%Y/%m/%d") %>,&nbsp; <%= t.last_updated_by.name %>,&nbsp; <%= t.log %> </li>
+  <% end %>
+</p>
+
+  <%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0", :id => 'close', :class => BUTTONS_CLS['action'] %>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<%= link_to t('New Log'), SUBURI + commonx.new_log_path(:resource_id => @order.id, :resource_name => params[:controller], :subaction => 'mfg_batch', :format => :js), :remote => true, 
+                          :id => 'new_log_link', :class => BUTTONS_CLS['action'] if has_action_right?('create_mfg_batch', 'commonx/logs') %>    	
+</div>

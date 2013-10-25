@@ -1,0 +1,60 @@
+<div class="pagination"><%= will_paginate models %></div>
+<% if @order && @batches %>
+  <%=t('Order Total')%>=<%=@order.qty %>, <%=t('Batch Total')%>=<%=@qty_total%>, <%=t('Total Produced')%>=<%=@qty_produced_total%>
+<% end %>
+    <table class="table table-striped">
+		<tr>
+			<th><%= t('#') %></th>
+			<th><%= t('Order#')%></th>
+			<th><%= t('Start Date') %></th>
+			<th><%= t('Customer') %></th>
+			<th><%= t('Product Name/Drawing#') %></th>
+			<th><%= t('Qty') %></th>	
+			<th><%= t('Finish Date') %></th>
+			<th><%= t('Qty Produced') %></th>	
+            <th><%= t('Batch Status') %></th>		
+			<th><%= t('Completed?') %></th>
+			<th><%= t('Last Updated By') %></th>
+			<th></th>
+			<th></th>
+			
+		</tr>
+		<% models.each do |r| %>
+		  <tr>
+		  	<% unless has_action_right?('show', params[:controller], r) %>
+		  	  <td><%= prt(r, :id) %></td>
+		  	<% else %>
+		  	  <td><%= link_to r.id.to_s, SUBURI + "/authentify/view_handler?index=1&url=#{batch_path(r)}" %></td>
+		  	<% end %>
+		  	<td><%= prt(r, :order_id) %></td>
+		  	<td><%= r.start_date.strftime("%Y/%m/%d") %></td>
+		  	<td><%= MfgBatchx.rfq_class.find_by_id(r.rfq_id).customer.name %></td>
+		  	<% rfq = MfgBatchx.rfq_class.find_by_id(r.rfq_id) %>
+		  	<% if has_action_right?('show', MfgBatchx.rfq_class.to_s.underscore.pluralize, rfq) %>
+			  <td><%= link_to rfq.product_name + ' ' + rfq.drawing_num, SUBURI + "/authentify/view_handler?index=1&url=#{SUBURI + CGI::escape(eval(MfgBatchx.show_rfq_path))}" %></td>
+			<% else %>
+			  <td><%= rfq.product_name + ' ' + rfq.drawing_num %></td>
+			<% end %>
+			<td><%= prt(r, :qty) %></td>
+			<td><%= r.finish_date.strftime("%Y/%m/%d") if r.finish_date.present? %></td>
+			<td><%= prt(r, :qty_produced) %></td> 
+			<td><%= prt(r, 'batch_status.name') %></td>
+			<td><%= r.completed ? t('Yes') : t('No') %></td>
+			<td><%= prt(r, 'last_updated_by.name') %></td>    
+			<td><%= link_to t('Edit'), SUBURI + "/authentify/view_handler?index=1&url=#{edit_batch_path(r)}", :class => BUTTONS_CLS['action']  if has_action_right?('update', params[:controller], r) %></td>
+			<td><%#= link_to t('Samples'), SUBURI + "/authentify/view_handler?index=1&url=#{SUBURI + CGI::escape(event_taskx.event_tasks_path(:resource_id => r.id, :resource_string => params[:controller], :subaction => 'rfq_quote'))}", :class => BUTTONS_CLS['action']  if has_action_right?('index_rfq_quote', 'event_taskx/event_tasks', r) %></td>
+			
+		  </tr>
+		<% end %>
+	</table>
+	
+	<table class="table table-striped">
+	  <tr>
+	    <th>
+	    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	    	<%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0", :class => BUTTONS_CLS['action']  %>
+	    	<%= link_to t('New Batch'), SUBURI + "/authentify/view_handler?index=1&url=#{CGI::escape new_batch_path(:order_id => @order.id, :parent_record_id => @order.id, :parent_resource => MfgBatchx.order_class.to_s.underscore.pluralize) }", :class => BUTTONS_CLS['action']  if @order && has_action_right?('create', params[:controller], @order) %>
+	    </th>
+	  </tr>
+	</table>
+	
