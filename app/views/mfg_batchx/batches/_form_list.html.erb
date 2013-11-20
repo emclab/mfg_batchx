@@ -1,3 +1,7 @@
+<% if false %>
+  <%= render inline: ERB.new(@erb_code).result(binding) %>
+  
+<% else %>
 <div class="pagination"><%= will_paginate models %></div>
 <% if @order && @batches %>
   <%=t('Order Total')%>=<%=@order.qty %>, <%=t('Batch Total')%>=<%=@qty_total%>, <%=t('Total Produced')%>=<%=@qty_produced_total%>
@@ -57,4 +61,5 @@
 	    </th>
 	  </tr>
 	</table>
-	
+
+<% end %>	
