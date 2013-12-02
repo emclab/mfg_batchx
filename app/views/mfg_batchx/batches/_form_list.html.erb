@@ -46,7 +46,6 @@
 			<td><%= r.completed ? t('Yes') : t('No') %></td>
 			<td><%= prt(r, 'last_updated_by.name') %></td>    
 			<td><%= link_to t('Edit'), SUBURI + "/authentify/view_handler?index=1&url=#{edit_batch_path(r)}", :class => BUTTONS_CLS['action']  if has_action_right?('update', params[:controller], r) %></td>
-			<td><%#= link_to t('Samples'), SUBURI + "/authentify/view_handler?index=1&url=#{SUBURI + CGI::escape(event_taskx.event_tasks_path(:resource_id => r.id, :resource_string => params[:controller], :subaction => 'rfq_quote'))}", :class => BUTTONS_CLS['action']  if has_action_right?('index_rfq_quote', 'event_taskx/event_tasks', r) %></td>
 			
 		  </tr>
 		<% end %>
