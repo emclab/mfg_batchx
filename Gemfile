@@ -17,6 +17,7 @@ gem 'kustomerx', :path => '../kustomerx'
 gem 'mfg_orderx', :path => '../mfg_orderx'
 gem 'mfg_processx', :path => '../mfg_processx'
 gem 'event_taskx', :path => '../event_taskx'
+gem 'searchx', :path => '../searchx'
 
 # Declare any dependencies that are still in development here instead of in
 # your gemspec. These might include edge Rails or gems from your path or

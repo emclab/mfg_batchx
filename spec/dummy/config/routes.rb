@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   mount MfgOrderx::Engine => '/orderx'
   mount MfgProcessx::Engine => '/mfg_processx'
   mount EventTaskx::Engine => '/event_taskx'
+  mount Searchx::Engine => '/searchx'
   
   resource :session
   
