@@ -28,6 +28,8 @@ module MfgBatchx
       if @batch.save
         redirect_to CGI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Saved!")
       else
+        @rfq = MfgBatchx.rfq_class.find_by_id(params[:batch][:rfq_id]) if params[:batch].present? && params[:batch][:rfq_id].present?
+        @order = MfgBatchx.order_class.find_by_id(params[:batch][:order_id]) if params[:batch].present? && params[:batch][:order_id].present?
         flash[:notice] = t('Data Error. Not Saved!')
         render 'new'
       end

@@ -4,7 +4,8 @@
 <% else %>
 <%= simple_form_for @batch do |f| %>    
 
-  <%= f.input :order_id_noupdate, :label => t("Order#"), :readonly => true, :input_html => {:value => @order.id} %> 
+  <%= f.input :order_id, :label => t("Order#"), :readonly => true, :input_html => {:value => @order.id} %> 
+  <%= f.input :rfq_id, :as => :hidden, :input_html => {:value => @rfq.id} %> 
   <%= f.input :customer_name, :label => t('Customer'), :readonly => true, :input_html => {:value => @rfq.customer.name} %>
   <%= f.input :product_info, :label => t("Product Info"), :readonly => true, :input_html => {:value => @rfq.product_name + ' ' + @rfq.drawing_num}  %> 
   <%#= f.input :product_wt, :label => t("Product WT(g)"), :readonly => true, :input_html => {:value => @rfq.try(:product_wt)} %>  
