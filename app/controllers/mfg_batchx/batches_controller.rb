@@ -13,13 +13,13 @@ module MfgBatchx
       @qty_total = @batches.sum('qty') if @order && @batches
       @qty_produced_total = @batches.sum('qty_produced') if @order && @batches
       @batches = @batches.page(params[:page]).per_page(@max_pagination)
-      @erb_code = find_config_const('batch_index_view', 'mfg_batchx_batches')
+      @erb_code = find_config_const('batch_index_view', 'mfg_batchx')
     end
   
     def new
       @title = t('New Batch')
       @batch = MfgBatchx::Batch.new()
-      @erb_code = find_config_const('batch_new_view', 'mfg_batchx_batches')
+      @erb_code = find_config_const('batch_new_view', 'mfg_batchx')
     end
   
     def create
@@ -38,7 +38,7 @@ module MfgBatchx
     def edit
       @title = t('Update Batch')
       @batch = MfgBatchx::Batch.find_by_id(params[:id])
-      @erb_code = find_config_const('batch_edit_view', 'mfg_batchx_batches')
+      @erb_code = find_config_const('batch_edit_view', 'mfg_batchx')
     end
   
     def update
@@ -55,7 +55,7 @@ module MfgBatchx
     def show
       @title = t('Batch Info')
       @batch = MfgBatchx::Batch.find_by_id(params[:id])
-      @erb_code = find_config_const('batch_show_view', 'mfg_batchx_batches')
+      @erb_code = find_config_const('batch_show_view', 'mfg_batchx')
     end
     
     protected
