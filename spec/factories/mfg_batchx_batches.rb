@@ -14,5 +14,6 @@ FactoryGirl.define do
     void false
     qty_produced 1
     batch_status_id 1
+    wf_state ''
   end
 end

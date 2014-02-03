@@ -1,11 +1,13 @@
 module MfgBatchx
   class Batch < ActiveRecord::Base
-    attr_accessor :void_noupdate, :completed_noupdate, :batch_status_noupdate, :customer_name, :order_id_noupdate
-    attr_accessible :brief_note, :finish_date, :last_updated_by_id, :order_id, :qty, :qty_produced, :rfq_id, :start_date, :wfid, :completed, :void, :batch_status_id,
+    attr_accessor :void_noupdate, :completed_noupdate, :batch_status_noupdate, :customer_name, :order_id_noupdate, :wf_comment, :id_noupdate
+    attr_accessible :brief_note, :finish_date, :last_updated_by_id, :order_id, :qty, :qty_produced, :rfq_id, :start_date, :wfid, :completed, 
+                    :void, :batch_status_id, :wf_state,
                     :customer_name, :order_id_noupdate,
                     :as => :role_new 
-    attr_accessible :brief_note, :completed, :finish_date, :last_updated_by_id, :order_id, :qty, :qty_produced, :rfq_id, :start_date, :wfid, :void, :batch_status_id,
-                    :void_noupdate, :completed_noupdate, :batch_status_noupdate, :customer_name, :order_id_noupdate,
+    attr_accessible :brief_note, :completed, :finish_date, :last_updated_by_id, :order_id, :qty, :qty_produced, :rfq_id, :start_date, :wfid, 
+                    :void, :batch_status_id, :wf_state,
+                    :void_noupdate, :completed_noupdate, :batch_status_noupdate, :customer_name, :order_id_noupdate, :wf_comment, :id_noupdate,
                     :as => :role_update
     
     belongs_to :last_updated_by, :class_name => 'Authentify::User'
