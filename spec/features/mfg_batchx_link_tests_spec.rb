@@ -44,16 +44,23 @@ describe "LinkTests" do
         :sql_code => "")
       user_access = FactoryGirl.create(:user_access, :action => 'create_mfg_batch', :resource => 'commonx_logs', :role_definition_id => @role.id, :rank => 1,
         :sql_code => "")
+      ua1 = FactoryGirl.create(:user_access, :action => 'index', :resource => 'mfg_batchx_step_qties', :role_definition_id => @role.id, :rank => 1,
+           :sql_code => "MfgBatchx::StepQty.scoped.order('id')")
+      ua1 = FactoryGirl.create(:user_access, :action => 'create', :resource => 'mfg_batchx_step_qties', :role_definition_id => @role.id, :rank => 1,
+           :sql_code => "")
+      ua1 = FactoryGirl.create(:user_access, :action => 'update', :resource => 'mfg_batchx_step_qties', :role_definition_id => @role.id, :rank => 1,
+           :sql_code => "")
       
       @cust = FactoryGirl.create(:kustomerx_customer) 
       @rfq = FactoryGirl.create(:jobshop_rfqx_rfq, :customer_id => @cust.id, :sales_id => @u.id)
-      @rfq1 = FactoryGirl.create(:jobshop_rfqx_rfq, :product_name => 'new name', :drawing_num => '12345', :customer_id => @cust.id, :sales_id => @u.id)
+      #@rfq1 = FactoryGirl.create(:jobshop_rfqx_rfq, :product_name => 'new name', :drawing_num => '12345', :customer_id => @cust.id, :sales_id => @u.id)
       @order = FactoryGirl.create(:mfg_orderx_order, :rfq_id => @rfq.id)
-      @order1 = FactoryGirl.create(:mfg_orderx_order, :rfq_id => @rfq1.id)
+      #@order1 = FactoryGirl.create(:mfg_orderx_order, :rfq_id => @rfq1.id)
       @status = FactoryGirl.create(:commonx_misc_definition, :for_which => 'mfg_batch_status', :name => 'started')
       @b = FactoryGirl.create(:mfg_batchx_batch, :rfq_id => @rfq.id, :order_id => @order.id)
       log = FactoryGirl.create(:commonx_log, :resource_name => 'mfg_batchx_batches', :resource_id => @b.id)
-       
+      @step = FactoryGirl.create(:mfg_batchx_step_qty, :batch_id => @b.id, :batch_status_id => @status.id)
+        
       visit '/'
       #save_and_open_page
       fill_in "login", :with => @u.login
@@ -79,6 +86,26 @@ describe "LinkTests" do
       click_link 'New Batch'
       #save_and_open_page
       page.should have_content('New Batch')
+    end
+    
+    it "works for step qty" do
+      visit batches_path
+      save_and_open_page
+      page.should have_content('Step Product Qties')
+      click_link "Step Product Qties"
+      save_and_open_page
+      page.should have_content('Next Step')
+      click_link 'Next Step'
+      save_and_open_page
+      
+      visit batches_path
+      #save_and_open_page
+      page.should have_content('Step Product Qties')
+      click_link "Step Product Qties"
+      #save_and_open_page
+      page.should have_content('Edit')
+      click_link 'Edit'
+      save_and_open_page
     end
   end
 end

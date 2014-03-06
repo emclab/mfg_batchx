@@ -14,6 +14,8 @@ module MfgBatchx
     belongs_to :rfq, :class_name => MfgBatchx.rfq_class.to_s
     belongs_to :order, :class_name => MfgBatchx.order_class.to_s
     belongs_to :batch_status, :class_name => 'Commonx::MiscDefinition'
+    has_many :step_qties, :class_name => 'MfgBatchx::StepQty'
+    #accepts_nested_attributes_for :step_qties, :reject_if => proc {|i| i['qty'].blank? }
     
     validates :order_id, :rfq_id, :presence => true,
                          :numericality => {:greater_than => 0}

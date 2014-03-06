@@ -1,0 +1,22 @@
+<% if @view_in_config && @erb_code %>
+  <%= render inline: ERB.new(@erb_code).result(binding) %>
+  
+<% else %>
+<%= simple_form_for @step_qty do |f| %>    
+
+  <%= f.input :qty, :label => t("Qty"), :readonly => readonly?(@step_qty, 'qty') %>
+  <% if readonly?(@step_qty, 'batch_status_id')%>
+    <%= f.input :batch_status_noupdate, :label => t("Batch Status"), :input_html => {:value => @step_qty.batch_status.name} %>
+  <% else %>
+    <%= f.input :batch_status_id, :label => t("Batch Status"), :collection => Commonx::CommonxHelper.return_misc_definitions('mfg_batch_status'), :label_method => :name, :value_method => :id %>
+  <% end %>    
+  <%= f.input :brief_note, :label => t("Brief Note"), :input_html => {:rows => 1}, :readonly => readonly?(@step_qty, 'brief_note') %> 
+    
+  <%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0", :class => BUTTONS_CLS['action'] %>
+  <%= f.button :submit, t('Save') %> 
+<% end %>
+   
+
+<% end %>
+
+

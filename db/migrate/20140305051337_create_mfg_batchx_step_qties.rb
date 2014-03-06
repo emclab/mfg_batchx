@@ -1,0 +1,16 @@
+class CreateMfgBatchxStepQties < ActiveRecord::Migration
+  def change
+    create_table :mfg_batchx_step_qties do |t|
+      t.integer :batch_id
+      t.integer :batch_status_id
+      t.integer :qty
+      t.text :brief_note
+      t.integer :last_updated_by_id
+
+      t.timestamps
+    end
+    
+    add_index :mfg_batchx_step_qties, :batch_id
+    add_index :mfg_batchx_step_qties, :batch_status_id
+  end
+end

@@ -1,0 +1,6 @@
+<div class="fields">
+  <%= f.input :batch_status_id, :label => t("Batch Status"), :collection => Commonx::CommonxHelper.return_misc_definitions('mfg_batch_status'), 
+              :include_blank => true, :label_method => :name, :value_method => :id %>
+  <%= f.input :qty, :label => t("Step Qty") %>
+  <%= f.input :brief_note, :label => t("Brief Note"), :input_html => {:rows => 1} %>
+</div>
