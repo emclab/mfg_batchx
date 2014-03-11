@@ -22,6 +22,6 @@ module MfgBatchx
     validates :qty, :presence => true,
                     :numericality => {:greater_than => 0, :message => I18n.t('Qty > 0')}   
     validates :qty_produced, :numericality => {:greater_or_equal_to => 0}, :if => 'qty_produced.present?'
-    validates_presence_of :batch_status_id, :start_date
+    validates_presence_of :start_date  #:batch_status_id,
   end
 end

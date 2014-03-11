@@ -11,11 +11,11 @@
   <%= f.input :start_date, :label => t("Start Date"), :as => :string, :readonly => readonly?(@batch, 'start_date') %> 
   <%= f.input :finish_date, :label => t("Finish Date"), :as => :string, :readonly => readonly?(@batch, 'finish_date') %> 
   <%= f.input :qty_produced, :label => t("Qty Produced"), :readonly => readonly?(@batch, 'qty_produced') %>
-  <% if readonly?(@batch, 'batch_status_id')%>
-    <%= f.input :batch_status_noupdate, :label => t("Batch Status"), :input_html => {:value => @batch.batch_status.name} %>
-  <% else %>
-    <%= f.input :batch_status_id, :label => t("Batch Status"), :collection => Commonx::CommonxHelper.return_misc_definitions('mfg_batch_status'), :label_method => :name, :value_method => :id %>
-  <% end %>
+  <%# if readonly?(@batch, 'batch_status_id')%>
+    <%#= f.input :batch_status_noupdate, :label => t("Batch Status"), :input_html => {:value => @batch.batch_status.name} %>
+  <%# else %>
+    <%#= f.input :batch_status_id, :label => t("Batch Status"), :collection => Commonx::CommonxHelper.return_misc_definitions('mfg_batch_status'), :label_method => :name, :value_method => :id %>
+  <%# end %>
     
   <% if readonly?(@batch, 'void')%>
      <%= f.input :void_noupdate, :label => t('Void'), :readonly => true, :required => false, :input_html => {:value => @batch.expedite} %>

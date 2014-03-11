@@ -43,8 +43,8 @@
 			<td><%= prt(r, :qty) %></td>
 			<td><%= r.finish_date.strftime("%Y/%m/%d") if r.finish_date.present? %></td>
 			<td><%= prt(r, :qty_produced) %></td> 
-			<td><%= prt(r, 'batch_status.name') %></td>
-			<td><%= r.step_qties.where(batch_status_id: r.batch_status_id).first.qty if r.step_qties.present? %></td>
+			<td><%= r.step_qties.last.batch_status.name if r.step_qties.present? %></td>
+			<td><%= r.step_qties.last.qty if r.step_qties.present? %></td>
 			<td><%= r.completed ? t('Yes') : t('No') %></td>
 			<td><%= prt(r, 'last_updated_by.name') %></td>    
 			<td><%= link_to t('Edit'), SUBURI + "/authentify/view_handler?index=1&url=#{edit_batch_path(r)}", :class => BUTTONS_CLS['action']  if has_action_right?('update', params[:controller], r) %></td>

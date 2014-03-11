@@ -6,7 +6,7 @@
 
     <table class="table table-striped">
 		<tr>
-			<th><%= t('Batch#')%></th>
+			<th><%#= t('Batch#')%></th>
 			<th><%= t('Enter Date') %></th>
 			<th><%= t('Batch Status') %></th>	
 			<th><%= t('Qty') %></th>
@@ -18,8 +18,8 @@
 		<% models.each do |r| %>
 		  <tr>
 		  	
-		  	<td><%= prt(r, :batch_id) %></td>
-		  	<td><%= r.created_at.strftime("%Y/%m/%d:%I%P") %></td>
+		  	<td><%#= prt(r, :batch_id) %></td>
+		  	<td><%= r.created_at.strftime("%Y/%m/%d::%I%P") %></td>
 			<td><%= prt(r, 'batch_status.name') %></td>
 			<td><%= prt(r, :qty) %></td>
 			<td><%= prt(r, :brief_note) %></td>
@@ -35,10 +35,11 @@
 	    <th>
 	    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	    	<%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0", :class => BUTTONS_CLS['action'], :id => 'close'  %>
-	    	<%= link_to t('Next Step'), new_step_qty_path(:batch_id => @batch.id, :format => :js, :parent_record_id => @batch.id, :parent_resource => 'mfg_batchx/batches'), :remote => true,
+	    	<%= link_to t('Next Step'), new_step_qty_path(:batch_id => @batch.id, :format => :js), :remote => true, :id => 'new_log_link',
 	    	                            :class => BUTTONS_CLS['action']  if @batch && has_action_right?('create', params[:controller], @batch) %>
 	    </th>
 	  </tr>
 	</table>
 
 <% end %>	
+

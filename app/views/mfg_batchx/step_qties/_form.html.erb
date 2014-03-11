@@ -12,8 +12,8 @@
   <% end %>    
   <%= f.input :brief_note, :label => t("Brief Note"), :input_html => {:rows => 1}, :readonly => readonly?(@step_qty, 'brief_note') %> 
     
-  <%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0", :class => BUTTONS_CLS['action'] %>
-  <%= f.button :submit, t('Save') %> 
+  <%= link_to t('Back'), step_qties_path(batch_id: @batch.id), :class => BUTTONS_CLS['action'] %>
+  <%= f.button :submit, t('Save'), :class => BUTTONS_CLS['action'] %> 
 <% end %>
    
 

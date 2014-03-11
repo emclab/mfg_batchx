@@ -8,7 +8,7 @@ module MfgBatchx
     def index
       @title = t('Step Qties')
       @step_qties = params[:mfg_batchx_step_qties][:model_ar_r]
-      @step_qties = @step_qties.where(:batch_id => @step_qty.batch_id) if @step_qty
+      @step_qties = @batch.step_qties if @batch
       @step_qties = @step_qties.page(params[:page]).per_page(@max_pagination)
       #@erb_code = find_config_const('batch_index_view', 'mfg_batchx')
     end
@@ -23,7 +23,7 @@ module MfgBatchx
       @step_qty = MfgBatchx::StepQty.new(params[:step_qty], :as => :role_new)
       @step_qty.last_updated_by_id = session[:user_id]
       if @step_qty.save
-        redirect_to CGI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Saved!")
+        redirect_to step_qties_path(batch_id: @step_qty.batch_id), :notice => t('Successfully Saved!') #URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Saved!")
       else
         @batch = MfgBatchx::Batch.find_by_id(params[:batch][:batch_id]) if params[:batch].present? && params[:batch][:batch_id].present?
         flash[:notice] = t('Data Error. Not Saved!')
@@ -41,7 +41,7 @@ module MfgBatchx
       @step_qty = MfgBatchx::StepQty.find_by_id(params[:id])
       @step_qty.last_updated_by_id = session[:user_id]
       if @step_qty.update_attributes(params[:step_qty], :as => :role_update)
-        redirect_to CGI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Updated!")
+        redirect_to step_qties_path(batch_id: @step_qty.batch_id), :notice => t('Successfully Updated!') #URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Updated!")
       else
         flash[:notice] = t('Data Error. Not Updated!')
         render 'edit'
