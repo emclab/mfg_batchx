@@ -26,7 +26,7 @@ module MfgBatchx
       @batch = MfgBatchx::Batch.new(params[:batch], :as => :role_new)
       @batch.last_updated_by_id = session[:user_id]
       if @batch.save
-        redirect_to CGI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Saved!")
+        redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Saved!")
       else
         @rfq = MfgBatchx.rfq_class.find_by_id(params[:batch][:rfq_id]) if params[:batch].present? && params[:batch][:rfq_id].present?
         @order = MfgBatchx.order_class.find_by_id(params[:batch][:order_id]) if params[:batch].present? && params[:batch][:order_id].present?
@@ -45,7 +45,7 @@ module MfgBatchx
       @batch = MfgBatchx::Batch.find_by_id(params[:id])
       @batch.last_updated_by_id = session[:user_id]
       if @batch.update_attributes(params[:batch], :as => :role_update)
-        redirect_to CGI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Updated!")
+        redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Updated!")
       else
         flash[:notice] = t('Data Error. Not Updated!')
         render 'edit'
