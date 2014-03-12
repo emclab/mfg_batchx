@@ -83,7 +83,7 @@ module MfgBatchx
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@u.id)
         q = FactoryGirl.attributes_for(:mfg_batchx_batch, :order_id => @order.id, :batch_status_id => @status.id)
         get 'create', {:use_route => :mfg_batchx, :order_id => @order.id, :batch => q}
-        response.should redirect_to CGI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Saved!")
+        response.should redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Saved!")
       end
       
       it "should render new with data error" do
@@ -117,7 +117,7 @@ module MfgBatchx
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@u.id)
         q = FactoryGirl.create(:mfg_batchx_batch, :order_id => @order1.id, :batch_status_id => @status.id)
         get 'update', {:use_route => :mfg_batchx, :id => q.id, :batch => {:brief_note => 'steel 201'}}
-        response.should redirect_to CGI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Updated!")
+        response.should redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Updated!")
       end
       
       it "should render edit with data error" do
