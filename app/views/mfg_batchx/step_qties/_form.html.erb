@@ -9,7 +9,9 @@
     <%= f.input :batch_status_noupdate, :label => t("Batch Status"), :input_html => {:value => @step_qty.batch_status.name} %>
   <% else %>
     <%= f.input :batch_status_id, :label => t("Batch Status"), :collection => Commonx::CommonxHelper.return_misc_definitions('mfg_batch_status'), :label_method => :name, :value_method => :id %>
-  <% end %>    
+  <% end %> 
+  <%= f.input :ontime_indicator, :label => t('On Time'), :collection => ['green', 'yellow', 'red'] unless readonly?(@step_qty, 'ontime_indicator')%>   
+  <%= f.input :ontime_indicator_noupdate, :label => t('On Time'), :input_html => {:value => @step_qty.ontime_indicator } if readonly?(@step_qty, 'ontime_indicator')%>
   <%= f.input :brief_note, :label => t("Brief Note"), :input_html => {:rows => 1}, :readonly => readonly?(@step_qty, 'brief_note') %> 
     
   <%= link_to t('Back'), step_qties_path(batch_id: @batch.id), :class => BUTTONS_CLS['action'] %>

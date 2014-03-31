@@ -21,5 +21,10 @@ module MfgBatchx
       c = FactoryGirl.build(:mfg_batchx_step_qty, :batch_status_id => nil)
       c.should_not be_valid
     end
+    
+    it "should reject nil ontime_indicator" do
+      c = FactoryGirl.build(:mfg_batchx_step_qty, :ontime_indicator => nil)
+      c.should_not be_valid
+    end
   end
 end

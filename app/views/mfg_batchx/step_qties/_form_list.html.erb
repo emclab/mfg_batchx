@@ -8,7 +8,8 @@
 		<tr>
 			<th><%#= t('Batch#')%></th>
 			<th><%= t('Enter Date') %></th>
-			<th><%= t('Batch Status') %></th>	
+			<th><%= t('Batch Status') %></th>
+			<th><%= t('On Time') %></th>	
 			<th><%= t('Qty') %></th>
 			<th><%= t('Brief Note') %></th>	
 			<th><%= t('Last Updated By') %></th>
@@ -21,6 +22,7 @@
 		  	<td><%#= prt(r, :batch_id) %></td>
 		  	<td><%= r.created_at.strftime("%Y/%m/%d::%I%P") %></td>
 			<td><%= prt(r, 'batch_status.name') %></td>
+			<td><%= prt(r, 'ontime_indicator') %></td>
 			<td><%= prt(r, :qty) %></td>
 			<td><%= prt(r, :brief_note) %></td>
 			<td><%= prt(r, 'last_updated_by.name') %></td>    

@@ -16,7 +16,8 @@
 			<th><%= t('Qty') %></th>	
 			<th><%= t('Finish Date') %></th>
 			<th><%= t('Qty Produced') %></th>	
-            <th><%= t('Batch Status') %></th>	
+            <th><%= t('Batch Status') %></th>
+            <th><%= t('On Time') %></th>		
             <th><%= t('Step Qty') %></th>	
 			<th><%= t('Completed?') %></th>
 			<th><%= t('Last Updated By') %></th>
@@ -44,6 +45,7 @@
 			<td><%= r.finish_date.strftime("%Y/%m/%d") if r.finish_date.present? %></td>
 			<td><%= prt(r, :qty_produced) %></td> 
 			<td><%= r.step_qties.last.batch_status.name if r.step_qties.present? %></td>
+			<td><%= r.step_qties.last.ontime_indicator if r.step_qties.present? %></td>
 			<td><%= r.step_qties.last.qty if r.step_qties.present? %></td>
 			<td><%= r.completed ? t('Yes') : t('No') %></td>
 			<td><%= prt(r, 'last_updated_by.name') %></td>    
