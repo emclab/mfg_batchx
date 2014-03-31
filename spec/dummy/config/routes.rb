@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   mount Kustomerx::Engine => '/kustomerx'
   mount MfgOrderx::Engine => '/orderx'
   mount MfgProcessx::Engine => '/mfg_processx'
+  mount ProducedItemWarehousex::Engine => '/prod_warehouse'
   mount EventTaskx::Engine => '/event_taskx'
   mount Searchx::Engine => '/searchx'
   mount StateMachineLogx::Engine => '/sm_log'

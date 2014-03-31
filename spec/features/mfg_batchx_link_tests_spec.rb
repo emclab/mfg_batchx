@@ -50,6 +50,8 @@ describe "LinkTests" do
            :sql_code => "")
       ua1 = FactoryGirl.create(:user_access, :action => 'update', :resource => 'mfg_batchx_step_qties', :role_definition_id => @role.id, :rank => 1,
            :sql_code => "")
+      ua1 = FactoryGirl.create(:user_access, :action => 'create', :resource => 'produced_item_warehousex_items', :role_definition_id => @role.id, :rank => 1,
+           :sql_code => "")
       
       @cust = FactoryGirl.create(:kustomerx_customer) 
       @rfq = FactoryGirl.create(:jobshop_rfqx_rfq, :customer_id => @cust.id, :sales_id => @u.id)
@@ -57,7 +59,7 @@ describe "LinkTests" do
       @order = FactoryGirl.create(:mfg_orderx_order, :rfq_id => @rfq.id)
       #@order1 = FactoryGirl.create(:mfg_orderx_order, :rfq_id => @rfq1.id)
       @status = FactoryGirl.create(:commonx_misc_definition, :for_which => 'mfg_batch_status', :name => 'started')
-      @b = FactoryGirl.create(:mfg_batchx_batch, :rfq_id => @rfq.id, :order_id => @order.id)
+      @b = FactoryGirl.create(:mfg_batchx_batch, :rfq_id => @rfq.id, :order_id => @order.id, :qty_produced => 500)
       log = FactoryGirl.create(:commonx_log, :resource_name => 'mfg_batchx_batches', :resource_id => @b.id)
       @step = FactoryGirl.create(:mfg_batchx_step_qty, :batch_id => @b.id, :batch_status_id => @status.id)
         
@@ -79,6 +81,12 @@ describe "LinkTests" do
       visit batches_path
       click_link @b.id.to_s
       page.should have_content('Batch Info')
+      save_and_open_page
+      click_link 'Warehouse Checkin'
+      save_and_open_page
+      #
+      visit batches_path
+      click_link @b.id.to_s
       click_link 'New Log'
       page.should have_content('Log')
       visit batches_path(:order_id => @order.id)
@@ -90,13 +98,13 @@ describe "LinkTests" do
     
     it "works for step qty" do
       visit batches_path
-      save_and_open_page
+      #save_and_open_page
       page.should have_content('Step Product Qties')
       click_link "Step Product Qties"
-      save_and_open_page
+      #save_and_open_page
       page.should have_content('Next Step')
       click_link 'Next Step'
-      save_and_open_page
+      #save_and_open_page
       
       visit batches_path
       #save_and_open_page
@@ -105,7 +113,7 @@ describe "LinkTests" do
       #save_and_open_page
       page.should have_content('Edit')
       click_link 'Edit'
-      save_and_open_page
+      #save_and_open_page
     end
   end
 end

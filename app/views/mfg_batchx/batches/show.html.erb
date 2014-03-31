@@ -76,6 +76,9 @@
 	    <th>
   			<%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0", :id => 'close', :class => BUTTONS_CLS['action'] %>
   			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  			<%= link_to t('Warehouse Checkin'), SUBURI + "/authentify/view_handler?index=1&url=#{SUBURI + CGI::escape(eval(MfgBatchx.warehouse_checkin_path))}", :id => 'new_request_link', 
+  			            :class => BUTTONS_CLS['action'] if @batch.qty_produced.present? && MfgBatchx.warehouse_item_class.where(:batch_id => @batch.id).blank? %>
+  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<%= link_to t('New Log'), SUBURI + commonx.new_log_path(:resource_id => @order.id, :resource_name => params[:controller], :subaction => 'mfg_batch', :format => :js), :remote => true, 
                           :id => 'new_log_link', :class => BUTTONS_CLS['action'] if has_action_right?('create_mfg_batch', 'commonx/logs') %> 
         </th>
