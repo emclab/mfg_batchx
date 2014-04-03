@@ -19,8 +19,8 @@
             <th><%= t('Batch Status') %></th>
             <th><%= t('On Time') %></th>
             <th><%= t('Step Qty') %></th>
-            <th><%= t('Warehoused?') %></th>	
-			<th><%= t('Completed?') %></th>
+            <th><%= t('Warehoused') %></th>	
+			<th><%= t('Completed') %></th>
 			<th><%= t('Last Updated By') %></th>
 			<th></th>
 			<th></th>
@@ -51,9 +51,9 @@
 			<td><%= MfgBatchx.warehouse_item_class.where(batch_id: r.id).present? ? t('Yes') : t('No') %></td>
 			<td><%= r.completed ? t('Yes') : t('No') %></td>
 			<td><%= prt(r, 'last_updated_by.name') %></td>    
-			<td><%= link_to t('Edit'), SUBURI + "/authentify/view_handler?index=1&url=#{edit_batch_path(r)}", :class => BUTTONS_CLS['action']  if has_action_right?('update', params[:controller], r) %></td>
 			<td><%= link_to t('Step Product Qties'), SUBURI + "/authentify/view_handler?index=1&url=#{step_qties_path(:batch_id => r.id)}", :class => BUTTONS_CLS['action']  %></td>
-		
+		    <td><%= link_to t('Edit'), SUBURI + "/authentify/view_handler?index=1&url=#{edit_batch_path(r)}", :class => BUTTONS_CLS['action']  if has_action_right?('update', params[:controller], r) %></td>
+			
 		  </tr>
 		<% end %>
 	</table>
