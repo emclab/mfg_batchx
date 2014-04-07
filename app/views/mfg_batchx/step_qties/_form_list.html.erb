@@ -22,7 +22,7 @@
 		  	<td><%#= prt(r, :batch_id) %></td>
 		  	<td><%= r.created_at.strftime("%Y/%m/%d::%I%P") %></td>
 			<td><%= prt(r, 'batch_status.name') %></td>
-			<td><%= prt(r, 'ontime_indicator') %></td>
+			<td><%= image_tag('mfg_batchx/'+RED_GREEN_YELLOW_CLS[r.ontime_indicator], size: '23x23') if r.ontime_indicator.present? %></td>
 			<td><%= prt(r, :qty) %></td>
 			<td><%= prt(r, :brief_note) %></td>
 			<td><%= prt(r, 'last_updated_by.name') %></td>    

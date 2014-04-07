@@ -46,7 +46,7 @@
 			<td><%= r.finish_date.strftime("%Y/%m/%d") if r.finish_date.present? %></td>
 			<td><%= prt(r, :qty_produced) %></td> 
 			<td><%= r.step_qties.last.batch_status.name if r.step_qties.present? %></td>
-            <td><img src="<%= RED_GREEN_YELLOW_CLS[r.step_qties.last.ontime_indicator] if r.step_qties.present? %>"  height="15" width="15" /></td>
+            <td><%= image_tag('mfg_batchx/'+RED_GREEN_YELLOW_CLS[r.step_qties.last.ontime_indicator], size: '23x23') if r.step_qties.present? && r.step_qties.last.ontime_indicator.present? %></td>
             <td><%= r.step_qties.last.qty if r.step_qties.present? %></td>
 			<td><%= MfgBatchx.warehouse_item_class.where(batch_id: r.id).present? ? t('Yes') : t('No') %></td>
 			<td><%= r.completed ? t('Yes') : t('No') %></td>
