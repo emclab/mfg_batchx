@@ -22,10 +22,10 @@ module MfgBatchx
       c.should_not be_valid
     end
     
-   # it "should reject nil batch_status_id" do
-    #  c = FactoryGirl.build(:mfg_batchx_batch, :batch_status_id => nil)
-    #  c.should_not be_valid
-    #end
+   it "should reject nil finish date" do
+      c = FactoryGirl.build(:mfg_batchx_batch, :finish_date => nil)
+      c.should_not be_valid
+    end
     
     it "should reject nil start_date" do
       c = FactoryGirl.build(:mfg_batchx_batch, :start_date => nil)

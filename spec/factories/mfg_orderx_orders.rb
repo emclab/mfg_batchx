@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :mfg_orderx_order, :class => 'MfgOrderx::Order' do
     quote_id 1
     rfq_id 1
-    wfid 'ffddfddsfs44'
+    drawing_num 'ffddfddsfs44'
     order_date "2013-10-16"
     delivery_date "2013-10-16"
     shipping_date "2013-10-16"

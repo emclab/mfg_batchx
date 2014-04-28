@@ -6,8 +6,9 @@
 
   <%= f.input :order_id_noupdate, :label => t("Order#"), :readonly => true, :input_html => {:value => @order.id} %> 
   <%= f.input :customer_name, :label => t('Customer'), :readonly => true, :input_html => {:value => @rfq.customer.name} %>
-  <%= f.input :product_info, :label => t("Product Info"), :readonly => true, :input_html => {:value => @rfq.product_name + ' ' + @rfq.drawing_num}  %> 
+  <%= f.input :product_info, :label => t("Product Info"), :readonly => true, :input_html => {:value => @rfq.product_name + ' ' + @order.drawing_num}  %> 
   <%= f.input :qty, :label => t("Qty"), :readonly => readonly?(@batch, 'qty') %>
+  <%= f.input :batch_num, :label => t('Batch#'), :readonly => readonly?(@batch, 'batch_num') %>
   <%= f.input :start_date, :label => t("Start Date"), :as => :string, :readonly => readonly?(@batch, 'start_date') %> 
   <%= f.input :finish_date, :label => t("Finish Date"), :as => :string, :readonly => readonly?(@batch, 'finish_date') %> 
   <%= f.input :qty_produced, :label => t("Qty Produced"), :readonly => readonly?(@batch, 'qty_produced') %>

@@ -7,7 +7,8 @@
   <%= f.input :order_id, :label => t("Order#"), :readonly => true, :input_html => {:value => @order.id} %> 
   <%= f.input :rfq_id, :as => :hidden, :input_html => {:value => @rfq.id} %> 
   <%= f.input :customer_name, :label => t('Customer'), :readonly => true, :input_html => {:value => @rfq.customer.name} %>
-  <%= f.input :product_info, :label => t("Product Info"), :readonly => true, :input_html => {:value => @rfq.product_name + ' ' + @rfq.drawing_num}  %> 
+  <%= f.input :product_info, :label => t("Product Info"), :readonly => true, :input_html => {:value => @rfq.product_name + ' ' + @order.drawing_num}  %> 
+  <%= f.input :batch_num, :label => t('Batch#') %>
   <%= f.input :qty, :label => t("Qty") %>
   <%= f.input :start_date, :label => t("Start Date"), :as => :string %> 
   <%= f.input :finish_date, :label => t("Finish Date"), :as => :string %> 

@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :jobshop_quotex_quote, :class => 'JobshopQuotex::Quote' do
     rfq_id 1
     quote_task_id 1
-    wfid "MyString"
+    drawing_num "My drawing 1234"
     last_updated_by_id 1
     qty_quoted 1
     unit "MyString"

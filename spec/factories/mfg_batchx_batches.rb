@@ -2,7 +2,6 @@
 
 FactoryGirl.define do
   factory :mfg_batchx_batch, :class => 'MfgBatchx::Batch' do
-    wfid "MyString"
     order_id 1
     last_updated_by_id 1
     qty 1
@@ -15,5 +14,6 @@ FactoryGirl.define do
     qty_produced 1
     batch_status_id 1
     wf_state ''
+    batch_num 'mydrawing1234'
   end
 end
