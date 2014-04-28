@@ -63,7 +63,10 @@
 	    <th>
 	    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	    	<%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0", :class => BUTTONS_CLS['action']  %>
+	    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	    	<%= link_to t('New Batch'), SUBURI + "/authentify/view_handler?index=1&url=#{CGI::escape new_batch_path(:order_id => @order.id, :parent_record_id => @order.id, :parent_resource => MfgBatchx.order_class.to_s.underscore.pluralize) }", :class => BUTTONS_CLS['action']  if @order && has_action_right?('create', params[:controller], @order) %>
+	        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	        <%= link_to t('Search'), SUBURI + "/authentify/view_handler?index=1&url=#{search_batches_path}", :class => BUTTONS_CLS['action'] if has_action_right?('search', params[:controller]) %>    	
 	    </th>
 	  </tr>
 	</table>
