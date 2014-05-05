@@ -31,5 +31,16 @@ module MfgBatchx
       c = FactoryGirl.build(:mfg_batchx_batch, :start_date => nil)
       c.should_not be_valid
     end
+    
+    it "should allow nil batch_num" do
+      c = FactoryGirl.build(:mfg_batchx_batch, :batch_num => nil)
+      c.should be_valid
+    end
+    
+    it "should reject dup batch_num" do
+      c = FactoryGirl.create(:mfg_batchx_batch, :batch_num => '1234')
+      c1 = FactoryGirl.build(:mfg_batchx_batch, :batch_num => c.batch_num)
+      c1.should be_valid
+    end
   end
 end

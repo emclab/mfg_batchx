@@ -5,10 +5,10 @@ zh-CN:
   
   #maint_recordx
   Mfg Batches  : '订单批次一览'
-  New Mfg Batch  : '新批次'
-  Update Mfg Batch : '更新批次'
-  Edit Mfg Batch : '更新批次'
-  Mfg Batch Info : '批次内容'
+  New Batch  : '新批次'
+  Update Batch : '更新批次'
+  Edit Batch : '更新批次'
+  Batch Info : '批次内容'
   New Step Qty  : '新工步'
   Update Step Qty : '更新工步数量'
   Edit Step Qty : '更新工步数量'
@@ -68,3 +68,4 @@ zh-CN:
   'Batch#' : '批次号'
   Batch Search : '批次搜索'
   Batch Finish Before Date : '完成于之前'
+  'Duplicate Batch#!' : '批次号相重'

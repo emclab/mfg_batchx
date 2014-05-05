@@ -28,10 +28,11 @@ module MfgBatchx
                     :numericality => {:greater_than => 0, :message => I18n.t('Qty > 0')}   
     validates :qty_produced, :numericality => {:greater_or_equal_to => 0}, :if => 'qty_produced.present?'
     validates :start_date, :finish_date, :presence => true  #:batch_status_id,
+    validates :batch_num, :uniqueness => {:scope => :id, :message => 'Duplicate Batch#!'}, :if => 'batch_num.present?'
     validate :dynamic_validate 
     
     def dynamic_validate
-      wf = Authentify::AuthentifyUtility.find_config_const('dynamic_validate', 'mfg_batchx')
+      wf = Authentify::AuthentifyUtility.find_config_const('dynamic_validate_batches', 'mfg_batchx')
       eval(wf) if wf.present?
     end
   end
